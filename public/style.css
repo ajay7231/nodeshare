@@ -1,0 +1,196 @@
+:root {
+  --bg-main-color: #a6e9f1;
+  --box-width:500px;
+  
+}
+
+body,
+html {
+  font-family: system-ui;
+  background: var(--bg-main-color);
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+body,
+.upload-box,
+.drop-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-box {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 20px 20px 0px #00000017;
+}
+
+.drop-area {
+  width: var(--box-width);
+  min-height: 200px;
+  border: 2px dashed var(--bg-main-color);
+  border-radius: 10px;
+  margin: 30px;
+  transition: 0.2s all ease-in;
+}
+
+.upload-box,
+.drop-area,
+.progress-bar {
+  flex-direction: column;
+}
+.icon-box {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.icon-box img {
+  width: 70px;
+  position: absolute;
+}
+.title {
+  margin-top: 20px;
+  font-size: 18px;
+}
+.dragged {
+  background-color: rgba(35, 157, 168, 0.7);
+  z-index: 1;
+  transition: 0.1s all ease-in-out;
+}
+#fileInput {
+  display: none;
+}
+.browse {
+  color: #02e0f8;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: var(--box-width);
+  height: 70px;
+  border: 3px solid var(--bg-main-color);
+  margin-bottom: 25px;
+  border-radius: 10px;
+  position: relative;
+  display: none;
+}
+.progress-bar .file-progress {
+  background: var(--bg-main-color);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: transform 250ms linear;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.progress-bar .inner-box {
+  position: absolute;
+  z-index: 1;
+  margin: 10px 15px;
+}
+p {
+  text-align: center;
+  opacity: 0.8;
+}
+
+.share-box {
+  width: var(--box-width);
+  margin-bottom: 10px;
+  position: relative;
+  display: none;
+}
+.share-box .input-box input {
+  width: 100%;
+  border: 2px dashed var(--bg-main-color);
+  border-radius: 6px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 20px;
+  background-color: #e3f1f3c9;
+  color: #0000008c;
+}
+
+.input-box img {
+  position: absolute;
+  height: 20px;
+  width: 30px;
+  right: 7px;
+  top: 65px;
+  background: #e3f1f3c9;
+  cursor: pointer;
+}
+.email-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.email-box form {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid var(--bg-main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+.email-box .field {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.email-box .field label {
+  font-weight: 600;
+  font-size: 18px;
+}
+.email-box .field input {
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid var(--bg-main-color);
+  outline: none;
+}
+
+button {
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+  outline: none;
+  transition: 0.1s all ease-in-out;
+}
+
+button:hover {
+  background: var(--bg-main-color);
+  cursor: pointer;
+}
+.toast {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(50%, 60px);
+  padding: 10px 20px;
+  border-radius: 8px 8px 8px 0px;
+  background-color: #fff;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: transform 250ms ease-in-out;
+}
+
+
+@media screen and (max-width:900px){
+  :root{
+    --box-width:320px;
+  }
+  .email-box .field{
+    flex-direction: column;
+    width: 300px;
+  }
+
+}
