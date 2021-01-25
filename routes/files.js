@@ -1,4 +1,4 @@
-const router = require("express").router();
+const router = require("express").Router();
 const multer = require("multer");
 const path = require("path");
 
@@ -20,7 +20,7 @@ let upload = multer({
   limits: { fieldSize: 100 * 1024 * 1024 },
 }).single("myfile");
 
-router.post("/", (res, res) => {
+router.post("/", (req, res) => {
 
   upload(req, res, async (err) => {
 
