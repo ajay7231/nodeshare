@@ -9,7 +9,7 @@ let storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => {
     const uniqueName = `${Date.now()}-${Math.round(
-      Math.random * 1e8
+      Math.random() * 1e8
     )}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   },
@@ -40,10 +40,47 @@ router.post("/", (req, res) => {
     });
 
     const response = await file.save();
-    return response.json({
+    return res.json({
       file: `${process.env.APP_URL}/files/${response.uuid}`,
     });
   });
 });
+
+router.post('/send', async(req,res)=>{
+  //validate
+
+  const {uuid,emailTo,emailFrom}  = req.body;
+
+  if(!uuid || !emailTo || !emailFrom){
+    return res.status(422).send({error:'All fields are required'});
+  }
+
+  // get data
+
+  const file = await File.findOne({uuid:uuid});
+
+  if(file.sender){
+    return res.status(422).send({error:'You can only send email once'});
+  }
+  file.sender = emailFrom;
+  file.receiver = emailTo;
+  const response = await file.save();
+
+
+  //send email
+  
+  const sendMail = require('../services/emailService');
+  sendMail({
+    from:emailFrom,
+    to:emailTo,
+    subject: 'nodeshare filecloud',
+    text:`${}`,
+    html:
+
+  })
+
+  
+
+})
 
 module.exports = router;

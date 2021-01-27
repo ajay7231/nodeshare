@@ -12,7 +12,7 @@ router.get('/:uuid', async (req,res)=>{
                   uuid:file.uuid,
                   fileName:file.filename,
                   fileSize: file.size,
-                  download:`${process.env.APP_URL}/files/download/${file.uuid}`
+                  downloadLink:`/files/download/${file.uuid}`,
             })
         
     }catch(err){
@@ -22,4 +22,4 @@ router.get('/:uuid', async (req,res)=>{
 
 })
 
-module.exports = router
+module.exports = router;
