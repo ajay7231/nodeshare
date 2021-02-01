@@ -50,6 +50,7 @@ router.post('/send', async(req,res)=>{
   //validate
 
   const {uuid,emailTo,emailFrom}  = req.body;
+  console.log(req.body)
 
   if(!uuid || !emailTo || !emailFrom){
     return res.status(422).send({error:'All fields are required'});
@@ -74,12 +75,17 @@ router.post('/send', async(req,res)=>{
     from:emailFrom,
     to:emailTo,
     subject: 'nodeshare filecloud',
-    text:`${}`,
-    html:
+    text:"",
+    html: require('../services/emailTemp')(
+      {emailFrom:emailFrom,
+       downloadLink:`${process.env.APP_URL}/files/${uuid}`,
+       size:parseInt(file.size/1000) + 'KB',
+       expires:'24 hours',
+      }
+    )
 
   })
-
-  
+  return res.send({success:'Email already sent'});
 
 })
 
