@@ -10,7 +10,7 @@ const fileURL = document.querySelector("#fileURL"); // to show url to dowload it
 const copyBtn = document.querySelector("#copyBtn"); // copy svg
 
 //http request url
-const baseURL = "http://localhost:3000/";
+const baseURL = "https://node-shareapp.herokuapp.com/";
 const uploadURL = `${baseURL}api/files`;
 const emailURL = `${baseURL}api/files/send`;
 
