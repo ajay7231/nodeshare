@@ -1,16 +1,17 @@
 const express = require("express");
 const path = require("path");
 var bodyParser = require("body-parser");
-const deleteEntry = require("./expire");
+const cron = require("node-cron");
+const File = require("./models/file");
 const fs = require("fs");
-const dir = "./uploads";
+const connectDb = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.static("public"));
 //app.use(express.json());
 app.use(bodyParser.json());
-const connectDb = require("./config/db");
+
 connectDb();
 
 // templates
@@ -21,10 +22,24 @@ app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
 app.use("/files/download", require("./routes/download"));
 
-app.listen(PORT, () => {
-  console.log(`listening on port : ${PORT}`);
+cron.schedule("* * * * *", async function () {
+  const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const files = await File.find({ createdAt: { $lt: pastDate } });
+  if (files.length) {
+    for (const file of files) {
+      try {
+        fs.unlinkSync(file.path);
+
+        await file.remove();
+        console.log(`successfully removed ${file.filename} `);
+      } catch (error) {
+        console.log(`Error while removing ${error}`);
+      }
+    }
+    console.log("removing done");
+  }
 });
 
-fs.readdir(dir, (err, files) => {
-  console.log(files.length);
+app.listen(PORT, () => {
+  console.log(`listening on port : ${PORT}`);
 });
