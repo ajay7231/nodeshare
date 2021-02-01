@@ -1,22 +1,25 @@
-const dropArea = document.querySelector(".drop-area");
-const fileInput = document.querySelector("#fileInput");
-const browse = document.querySelector(".browse");
+const dropArea = document.querySelector(".drop-area"); //dashed area
+const fileInput = document.querySelector("#fileInput"); // file input
+const browse = document.querySelector(".browse"); // browse btn
 
 const maxSize = 100 * 1024 * 1024; //100mb
-const fileProgress = document.querySelector(".file-progress");
-const percentValue = document.querySelector("#percent-value");
-const progressBar = document.querySelector(".progress-bar");
-const fileURL = document.querySelector("#fileURL");
-const copyBtn = document.querySelector("#copyBtn");
+const fileProgress = document.querySelector(".file-progress"); // progress bar
+const percentValue = document.querySelector("#percent-value"); // uploaded percent in progress bar
+const progressBar = document.querySelector(".progress-bar"); //progress bar box
+const fileURL = document.querySelector("#fileURL"); // to show url to dowload item or share
+const copyBtn = document.querySelector("#copyBtn"); // copy svg
 
-const baseURL = "https://innshare.herokuapp.com/";
+//http request url
+const baseURL = "http://localhost:3000/";
 const uploadURL = `${baseURL}api/files`;
 const emailURL = `${baseURL}api/files/send`;
+
 const shareBox = document.querySelector(".share-box");
 const inputBox = document.querySelector(".input-box");
 const emailForm = document.querySelector("#share-form");
 const toast = document.querySelector(".toast");
 
+// drop box background color toggle
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropArea.classList.add("dragged");
@@ -28,13 +31,15 @@ dropArea.addEventListener("dragleave", (e) => {
 });
 
 copyBtn.addEventListener("click", () => {
-  fileURL.select();
-  document.execCommand("copy");
-  showToast('Copied to Clipboard')
+  fileURL.select(); // select url text
+  document.execCommand("copy"); // execute copy command
+  showToast("Copied to Clipboard");
 });
 inputBox.addEventListener("click", () => {
   fileURL.select();
 });
+
+// on dropping files
 
 dropArea.addEventListener("drop", (e) => {
   e.preventDefault();
@@ -54,16 +59,16 @@ browse.addEventListener("click", () => {
 });
 
 const uploadFile = () => {
-  if(fileInput.files.length > 1){
-    showToast('only upload 1 file')
-    fileInput.value=''
+  if (fileInput.files.length > 1) {
+    showToast("only upload 1 file");
+    fileInput.value = "";
     return;
   }
   const file = fileInput.files[0];
 
-  if(file.size > maxSize){
-    showToast("Too large to upload")
-    fileInput.value = ""
+  if (file.size > maxSize) {
+    showToast("Too large to upload");
+    fileInput.value = "";
     return;
   }
   progressBar.style.display = "block";
@@ -84,10 +89,10 @@ const uploadFile = () => {
     percentValue.innerText = `${percent}%`;
   };
 
-  xhr.upload.onerror = ()=>{
-    fileInput.value = ""
-    showToast(`Error in Upload: ${xhr.statusText}` )
-  }
+  xhr.upload.onerror = () => {
+    fileInput.value = "";
+    showToast(`Error in Upload: ${xhr.statusText}`);
+  };
 
   xhr.open("POST", uploadURL);
   xhr.send(formData);
@@ -126,11 +131,11 @@ emailForm.addEventListener("submit", (e) => {
     .then(({ success }) => {
       if (success) {
         shareBox.style.display = "none";
-        showToast("File Send Successfully")
+        showToast("File Send Successfully");
       }
     });
 });
-let toastTimer
+let toastTimer;
 const showToast = (msg) => {
   toast.innerText = msg;
   toast.style.transform = "translate(-50%,0)";

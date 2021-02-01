@@ -3,9 +3,10 @@
 
 node_modules/
 
-
-./uploads
+uploads/*
+!uploads/.gitkeep
 
  
 # env file
 .env
+.DS_Store

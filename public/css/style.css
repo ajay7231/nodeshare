@@ -1,8 +1,7 @@
 :root {
   --bg-main-color: #a6e9f1;
-  --box-width:500px;
-  --dark-blue:#054f57;
-  
+  --box-width: 500px;
+  --dark-blue: #054f57;
 }
 
 body,
@@ -184,26 +183,22 @@ button:hover {
   transition: transform 250ms ease-in-out;
 }
 
-/* :root {
-    --bg-main-color: #a6e9f1;
-    --box-width:500px;
-    
-  } */
+/* download page  */
 
-  body.download-page{
-    font-family: system-ui;
-    background: var(--bg-main-color);
-    height: 98vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #333;
+body.download-page {
+  font-family: system-ui;
+  background: var(--bg-main-color);
+  height: 98vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
 }
 
 section.download {
   background: #fff;
-  width: 430px;
+  width: 400px;
   max-width: 90%;
   border-radius: 25px;
   box-shadow: 0px 20px 20px 0px #00000017;
@@ -228,22 +223,21 @@ section.download {
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .send-btn-container a:hover {
-    background: var(--dark-blue);
+  background: var(--dark-blue);
 }
 
+/* media queries */
 
-
-@media screen and (max-width:900px){
-  :root{
-    --box-width:320px;
+@media screen and (max-width: 900px) {
+  :root {
+    --box-width: 320px;
   }
-  .email-box .field{
+  .email-box .field {
     flex-direction: column;
     width: 300px;
   }
-
 }
