@@ -22,7 +22,7 @@ app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
 app.use("/files/download", require("./routes/download"));
 
-cron.schedule("* * * * *", async function () {
+cron.schedule("* * *", async function () {
   const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
   const files = await File.find({ createdAt: { $lt: pastDate } });
   if (files.length) {
