@@ -10,13 +10,8 @@
 
   <body class="download-page">
     <section class="download">
-      <img
-        class="download__icon"
-        src="/img/download.svg"
-        alt="download-icon"
-        style="fill: black"
-      />
-      <% if(locals.error){ %>
+      <img class="download__icon" src="/img/download.svg" alt="download-icon"
+      fill: "black" /> <% if(locals.error){ %>
       <h4><%= locals.error %> 😏</h4>
       <% } else { %>
       <h2>Your file is ready to download</h2>
