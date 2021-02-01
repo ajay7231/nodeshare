@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 var bodyParser = require("body-parser");
+const deleteEntry = require("./expire");
+const fs = require("fs");
+const dir = "./uploads";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,4 +23,8 @@ app.use("/files/download", require("./routes/download"));
 
 app.listen(PORT, () => {
   console.log(`listening on port : ${PORT}`);
+});
+
+fs.readdir(dir, (err, files) => {
+  console.log(files.length);
 });
