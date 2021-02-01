@@ -21,9 +21,7 @@ let upload = multer({
 }).single("myfile");
 
 router.post("/", (req, res) => {
-
   upload(req, res, async (err) => {
-
     if (!req.file) {
       return res.json({ error: "All values are required" });
     }
@@ -46,47 +44,45 @@ router.post("/", (req, res) => {
   });
 });
 
-router.post('/send', async(req,res)=>{
+//Email services
+
+router.post("/send", async (req, res) => {
   //validate
 
-  const {uuid,emailTo,emailFrom}  = req.body;
-  console.log(req.body)
+  const { uuid, emailTo, emailFrom } = req.body;
+  console.log(req.body);
 
-  if(!uuid || !emailTo || !emailFrom){
-    return res.status(422).send({error:'All fields are required'});
+  if (!uuid || !emailTo || !emailFrom) {
+    return res.status(422).send({ error: "All fields are required" });
   }
 
   // get data
 
-  const file = await File.findOne({uuid:uuid});
+  const file = await File.findOne({ uuid: uuid });
 
-  if(file.sender){
-    return res.status(422).send({error:'You can only send email once'});
+  if (file.sender) {
+    return res.status(422).send({ error: "You can only send email once" });
   }
   file.sender = emailFrom;
   file.receiver = emailTo;
   const response = await file.save();
 
-
   //send email
-  
-  const sendMail = require('../services/emailService');
+
+  const sendMail = require("../services/emailService");
   sendMail({
-    from:emailFrom,
-    to:emailTo,
-    subject: 'nodeshare filecloud',
-    text:"",
-    html: require('../services/emailTemp')(
-      {emailFrom:emailFrom,
-       downloadLink:`${process.env.APP_URL}/files/${uuid}`,
-       size:parseInt(file.size/1000) + 'KB',
-       expires:'24 hours',
-      }
-    )
-
-  })
-  return res.send({success:'Email already sent'});
-
-})
+    from: emailFrom,
+    to: emailTo,
+    subject: "nodeshare filecloud",
+    text: "",
+    html: require("../services/emailTemp")({
+      emailFrom: emailFrom,
+      downloadLink: `${process.env.APP_URL}/files/${uuid}`,
+      size: parseInt(file.size / 1000) + "KB",
+      expires: "24 hours",
+    }),
+  });
+  return res.send({ success: "Email already sent" });
+});
 
 module.exports = router;

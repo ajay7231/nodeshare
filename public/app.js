@@ -39,12 +39,12 @@ inputBox.addEventListener("click", () => {
   fileURL.select();
 });
 
-// on dropping files
+// on dropping or adding files
 
 dropArea.addEventListener("drop", (e) => {
   e.preventDefault();
   dropArea.classList.remove("dragged");
-  const files = e.dataTransfer.files;
+  const files = e.dataTransfer.files; // files to be processed further
   if (files.length > 0) {
     fileInput.files = files;
     uploadFile();
@@ -55,8 +55,10 @@ fileInput.addEventListener("change", () => {
 });
 
 browse.addEventListener("click", () => {
-  fileInput.click();
+  fileInput.click(); // enable input button action on browse
 });
+
+//to check if more than one file is requested
 
 const uploadFile = () => {
   if (fileInput.files.length > 1) {
@@ -109,7 +111,6 @@ const uploadSuccess = ({ file: url }) => {
 
 emailForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("trust");
 
   const url = fileURL.value;
 
