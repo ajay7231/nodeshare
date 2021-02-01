@@ -1,52 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NodeShare</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-   <section class="upload-box">
-       <div class="drop-area">
-           <div class="icon-box">
-               <img src="img/file.svg" alt="file upload" srcset="" draggable="false">
-           </div>
-           <input type="file" name="myfile" class="file" id="fileInput">
-           <div class="title">Drop your Files or, <span class="browse">browse</span></div>
-       </div>
-       <div class="progress-bar">
-           <div class="file-progress"></div>
-           <div class="inner-box">
-               <div class="upload-title">Uploading..</div>
-           <div class="percent-value"><span id="percent-value">0%</span></div>
-           </div>
-           
-       </div>
-       <div class="share-box">
-           <p class="expire">Link expires in 24 hours</p>
-           <div class="input-box">
-               <input type="text" name="" id="fileURL" readonly value="https://localhost:5000/api/file">
-               <img src="img/copy.svg" alt="copy icon" id="copyBtn">
+    <link rel="stylesheet" href="css/style.css" />
 
-           </div>
-           <p>Or send Via Email</p>
-           <div class="email-box">
-               <form id="share-form" action="">
-                   <div class="field">
-                       <label for="sender">Your Email:</label>
-                       <input type="email" required name="from-email" id="sender"> 
-                   </div>
-                   <div class="field">
-                    <label for="reciever">Reciever Email:</label>
-                    <input type="email" required name="to-email" id="reciever"> 
-                </div>
-                <button type="submit">Send</button>
-               </form>
-           </div>
-       </div>
-   </section>
-   <div class="toast">Copied to Clipboard</div>
-   <script src="app.js"></script>
-</body>
+    <!-- favicon -->
+    <link rel="icon" href="img/favicon.svg" />
+  </head>
+  <body>
+    <section class="upload-box">
+      <div class="drop-area">
+        <div class="icon-box">
+          <img
+            src="img/file.svg"
+            alt="file upload"
+            srcset=""
+            draggable="false"
+          />
+        </div>
+        <input type="file" name="myfile" class="file" id="fileInput" />
+        <div class="title">
+          Drop your Files or, <span class="browse">browse</span>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="file-progress"></div>
+        <div class="inner-box">
+          <div class="upload-title">Uploading..</div>
+          <div class="percent-value"><span id="percent-value">0%</span></div>
+        </div>
+      </div>
+      <div class="share-box">
+        <p class="expire">Link expires in 24 hours</p>
+        <div class="input-box">
+          <input
+            type="text"
+            name=""
+            id="fileURL"
+            readonly
+            value="https://localhost:5000/api/file"
+          />
+          <img src="img/copy.svg" alt="copy icon" id="copyBtn" />
+        </div>
+        <p>Or send Via Email</p>
+        <div class="email-box">
+          <form id="share-form" action="">
+            <div class="field">
+              <label for="sender">Your Email:</label>
+              <input type="email" required name="from-email" id="sender" />
+            </div>
+            <div class="field">
+              <label for="reciever">Reciever Email:</label>
+              <input type="email" required name="to-email" id="reciever" />
+            </div>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <div class="toast">Copied to Clipboard</div>
+    <script src="app.js"></script>
+  </body>
 </html>
