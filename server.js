@@ -40,6 +40,7 @@ const removeOld = async () => {
     console.log("removing done");
   }
 };
+removeOld();
 // });
 
 app.listen(PORT, () => {
