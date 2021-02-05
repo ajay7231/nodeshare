@@ -108,7 +108,7 @@ const uploadSuccess = ({ file: url }) => {
   shareBox.style.display = "block";
   var x = window.matchMedia("(max-width:900px)");
 
-  if (x.matches) document.querySelector(".logo").display = "none";
+  if (x.matches) document.querySelector(".logo").style.display = "none";
   fileURL.value = url;
 };
 
