@@ -22,23 +22,23 @@ app.use("/api/files", require("./routes/files"));
 app.use("/files", require("./routes/show"));
 app.use("/files/download", require("./routes/download"));
 
-//cron.schedule("0 2 * * *", async function () {
-  const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
-  const files = await File.find({ createdAt: { $lt: pastDate } });
-  if (files.length) {
-    for (const file of files) {
-      try {
-        fs.unlinkSync(file.path);
+// cron.schedule("0 2 * * *", async function () {
+const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+const files = await File.find({ createdAt: { $lt: pastDate } });
+if (files.length) {
+  for (const file of files) {
+    try {
+      fs.unlinkSync(file.path);
 
-        await file.remove();
-        console.log(`successfully removed ${file.filename} `);
-      } catch (error) {
-        console.log(`Error while removing ${error}`);
-      }
+      await file.remove();
+      console.log(`successfully removed ${file.filename} `);
+    } catch (error) {
+      console.log(`Error while removing ${error}`);
     }
-    console.log("removing done");
   }
-});
+  console.log("removing done");
+}
+// });
 
 app.listen(PORT, () => {
   console.log(`listening on port : ${PORT}`);
