@@ -18,6 +18,7 @@ const shareBox = document.querySelector(".share-box");
 const inputBox = document.querySelector(".input-box");
 const emailForm = document.querySelector("#share-form");
 const toast = document.querySelector(".toast");
+var mobileMedia = window.matchMedia("(max-width:900px)");
 
 // drop box background color toggle
 dropArea.addEventListener("dragover", (e) => {
@@ -106,9 +107,9 @@ const uploadSuccess = ({ file: url }) => {
   emailForm[2].removeAttribute("disabled", "false");
   progressBar.style.display = "none";
   shareBox.style.display = "block";
-  var x = window.matchMedia("(max-width:900px)");
 
-  if (x.matches) document.querySelector(".logo").style.display = "none";
+  if (mobileMedia.matches)
+    document.querySelector(".logo").style.display = "none";
   fileURL.value = url;
 };
 
@@ -146,6 +147,7 @@ const showToast = (msg) => {
   clearTimeout(toastTimer);
 
   toastTimer = setTimeout(() => {
-    toast.style.transform = "translate(-50%,60px)";
+    if (mobileMedia.matches) toast.style.transform = "translate(-50%,180px)";
+    else toast.style.transform = "translate(-50%,60px)";
   }, 1500);
 };
