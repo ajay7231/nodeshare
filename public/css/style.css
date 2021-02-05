@@ -250,6 +250,6 @@ section.download {
     left: 12%;
   }
   .toast {
-    transform: translate(50%, 60px);
+    transform: translate(50%, 180px);
   }
 }
