@@ -245,4 +245,8 @@ section.download {
     flex-direction: column;
     width: 300px;
   }
+  .upload-box {
+    position: absolute;
+    left: 12%;
+  }
 }

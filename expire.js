@@ -1,19 +1,19 @@
 // const File = require("./models/file");
-// const fs = require("fs");
+// //const fs = require("fs");
 // const connectDb = require("./config/db");
 
 // module.exports = () => {
 //   connectDb();
 
-//   deleteEntry = async () => {
-//     const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
-//     const files = await File.find({ createdAt: { $lt: pastDate } });
-//     if (files.length) {
+//   deleteEntry = () => {
+//     // const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+//     const files = File.find();
+//     if (files.length > 1) {
 //       for (const file of files) {
 //         try {
-//           fs.unlinkSync(file.path);
+//           //fs.unlinkSync(file.path);
 
-//           await file.remove();
+//           file.remove();
 //           console.log(`successfully removed ${file.filename} `);
 //         } catch (error) {
 //           console.log(`Error while removing ${error}`);

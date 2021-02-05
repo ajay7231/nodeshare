@@ -106,6 +106,9 @@ const uploadSuccess = ({ file: url }) => {
   emailForm[2].removeAttribute("disabled", "false");
   progressBar.style.display = "none";
   shareBox.style.display = "block";
+  var x = window.matchMedia("(max-width:900px)");
+
+  if (x.matches) document.querySelector(".logo").display = "none";
   fileURL.value = url;
 };
 
