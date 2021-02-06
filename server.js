@@ -25,8 +25,10 @@ app.use("/files/download", require("./routes/download"));
 // cron.schedule("0 2 * * *", async function () {
 const removeOld = async () => {
   connectDb();
-  const pastDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
-  const files = await File.find({ createdAt: { $lt: pastDate } });
+
+  const files = await File.find({
+    createdAt: { $lt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+  });
   if (files.length) {
     for (const file of files) {
       try {
